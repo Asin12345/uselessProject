@@ -161,4 +161,8 @@ Check the documentation for common solutions
  User accounts and order history
 
 
+The Screenshots 
+<img width="1920" height="1080" alt="Screenshot 2025-08-08 150303" src="https://github.com/user-attachments/assets/e8281259-fbea-4193-9348-ba315cb2d252" />
+
+
 MealMate - Making food ordering simple and delightful! 🍽️✨
