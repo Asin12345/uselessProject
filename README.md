@@ -162,7 +162,11 @@ Check the documentation for common solutions
 
 
 The Screenshots 
-<img width="1920" height="1080" alt="Screenshot 2025-08-08 150303" src="https://github.com/user-attachments/assets/e8281259-fbea-4193-9348-ba315cb2d252" />
+1-[fodd Menu]<img width="1920" height="1080" alt="Screenshot 2025-08-08 150303" src="https://github.com/user-attachments/assets/cae870df-f1a9-4fa6-86d1-712cbe3fd97f" />
+
+2-[ordering food]<img width="1920" height="1080" alt="Screenshot 2025-08-08 150233" src="https://github.com/user-attachments/assets/9014dfcb-17c0-4539-b865-0f13bb4b7efa" />
+
+3-[Result is unordering food]<img width="1920" height="1080" alt="Screenshot 2025-08-08 150303" src="https://github.com/user-attachments/assets/e8281259-fbea-4193-9348-ba315cb2d252" />
 
 
 MealMate - Making food ordering simple and delightful! 🍽️✨
