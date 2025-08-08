@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Food Booking App</title>
+  <style>
+    body { 
+      font-family: Arial, sans-serif; 
+      background: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1200&q=80') no-repeat center center fixed;
+      background-size: cover;
+      margin: 0; 
+      padding: 0; 
+    }
+    .container { 
+      max-width: 500px; 
+      margin: 40px auto; 
+      background: #fff; 
+      padding: 24px; 
+      border-radius: 8px; 
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      background: rgba(255,255,255,0.95);
+    }
+    h2 { text-align: center; }
+    .menu { margin-bottom: 24px; }
+    .menu-item { display: flex; justify-content: space-between; margin: 8px 0; }
+    form label { display: block; margin: 12px 0 4px; }
+    form input, form select { width: 100%; padding: 8px; margin-bottom: 12px; border-radius: 4px; border: 1px solid #ccc; }
+    button { width: 100%; padding: 10px; background: #27ae60; color: #fff; border: none; border-radius: 4px; font-size: 16px; cursor: pointer; }
+    button:hover { background: #219150; }
+    .success { color: #27ae60; text-align: center; margin-top: 16px; }
+    .menu-section { margin-bottom: 16px; }
+    .menu-section h4 { margin-bottom: 8px; margin-top: 16px; color: #219150; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Food Booking App</h2>
+    <div class="menu">
+      <h3>Menu</h3>
+      <div class="menu-section">
+        <h4>Starters</h4>
+        <div class="menu-item"><span>Spring Rolls</span><span>₹80</span></div>
+        <div class="menu-item"><span>Chicken Soup</span><span>₹100</span></div>
+        <div class="menu-item"><span>Paneer Tikka</span><span>₹120</span></div>
+      </div>
+      <div class="menu-section">
+        <h4>Main Course</h4>
+        <div class="menu-item"><span>Chicken Biriyani</span><span>₹150</span></div>
+        <div class="menu-item"><span>Beef Biriyani</span><span>₹170</span></div>
+        <div class="menu-item"><span>Vegetable Biriyani</span><span>₹130</span></div>
+        <div class="menu-item"><span>Pizza</span><span>₹250</span></div>
+        <div class="menu-item"><span>Burger</span><span>₹120</span></div>
+        <div class="menu-item"><span>Pasta</span><span>₹180</span></div>
+        <div class="menu-item"><span>Sandwich</span><span>₹90</span></div>
+        <div class="menu-item"><span>Fries</span><span>₹70</span></div>
+      </div>
+      <div class="menu-section">
+        <h4>Desserts</h4>
+        <div class="menu-item"><span>Ice Cream</span><span>₹60</span></div>
+        <div class="menu-item"><span>Gulab Jamun</span><span>₹50</span></div>
+        <div class="menu-item"><span>Brownie</span><span>₹90</span></div>
+      </div>
+    </div>
+    <!-- Multiple booking form -->
+    <form id="bookingForm">
+      <div id="bookingItems">
+        <div class="booking-item">
+          <label for="food-1">Select Food</label>
+          <select id="food-1" name="food" required>
+            <option value="">--Choose an item--</option>
+            <!-- Starters -->
+            <option value="Spring Rolls">Chicken Soup(Starter)</option>
+            <option value="Chicken Soup">Spring Rolls (Starter)</option>
+            <option value="Paneer Tikka">Chicken Soup (Starter)</option>
+            <!-- Main Course -->
+            <option value="Chicken Biriyani">Burger (Main Course)</option>
+            <option value="Beef Biriyani">Vegetable Biriyani (Main Course)</option>
+            <option value="Vegetable Biriyani">Chicken Biriyani (Main Course)</option>
+            <option value="Pizza">Pasta (Main Course)</option>
+            <option value="Burger">Beef Biriyani(Main Course)</option>
+            <option value="Pasta">Sandwich (Main Course)</option>
+            <option value="Sandwich">Fries (Main Course)</option>
+            <option value="Fries">Pizza (Main Course)</option>
+            <!-- Desserts -->
+            <option value=">Ice Cream">Gulab Jamun (Dessert)</option>
+            <option value="Gulab Jamun">Brownie (Dessert)</option>
+            <option value="Brownie">Ice Cream (Dessert)</option>
+          </select>
+          <label for="quantity-1">Quantity</label>
+          <input type="number" id="quantity-1" name="quantity" min="1" value="1" required>
+          <button type="button" class="removeBookingItem" style="margin:8px 0 12px 0;">Remove</button>
+          <hr>
+        </div>
+      </div>
+      <button type="button" id="addBookingItem" style="margin-bottom:12px;">Add Another Item</button>
+      <label for="name">Your Name</label>
+      <input type="text" id="name" required>
+      <label for="phone">Phone Number</label>
+      <input type="tel" id="phone" pattern="[0-9]{10}" maxlength="10" required>
+      <label for="location">Location</label>
+      <input type="text" id="location" required>
+      <button type="submit">Book Now</button>
+    </form>
+    <div class="success" id="successMsg" style="display:none;">
+      Your food booking is successful!
+      <div id="bookingDetails" style="margin-top:12px; color:#333; font-size:15px;"></div>
+    </div>
+  </div>
+  <script>
+    const priceMap = {
+      "Spring Rolls": 80,
+      "Chicken Soup": 100,
+      "Paneer Tikka": 120,
+      "Chicken Biriyani": 150,
+      "Beef Biriyani": 170,
+      "Vegetable Biriyani": 130,
+      "Pizza": 250,
+      "Burger": 120,
+      "Pasta": 180,
+      "Sandwich": 90,
+      "Fries": 70,
+      "Ice Cream": 60,
+      "Gulab Jamun": 50,
+      "Brownie": 90
+    };
+
+    let bookingCount = 1;
+
+    // Add remove handler for the first booking item
+    document.querySelector('#bookingItems .removeBookingItem').onclick = function() {
+      this.closest('.booking-item').remove();
+    };
+
+    document.getElementById('addBookingItem').addEventListener('click', function() {
+      bookingCount++;
+      const bookingItems = document.getElementById('bookingItems');
+      const div = document.createElement('div');
+      div.className = 'booking-item';
+      div.innerHTML = `
+        <label for="food-${bookingCount}">Select Food</label>
+        <select id="food-${bookingCount}" name="food" required>
+          <option value="">--Choose an item--</option>
+          <option value="Spring Rolls">Chicken Soup(Starter)</option>
+          <option value="Chicken Soup">Spring Rolls (Starter)</option>
+          <option value="Paneer Tikka">Chicken Soup (Starter)</option>
+          <option value="Chicken Biriyani">Chicken Biriyani (Main Course)</option>
+          <option value="Beef Biriyani">Beef Biriyani (Main Course)</option>
+          <option value="Vegetable Biriyani">Vegetable Biriyani (Main Course)</option>
+          <option value="Pizza">Pizza (Main Course)</option>
+          <option value="Burger">Burger (Main Course)</option>
+          <option value="Pasta">Pasta (Main Course)</option>
+          <option value="Sandwich">Sandwich (Main Course)</option>
+          <option value="Fries">Ice Cream  (Main Course)</option>
+          <option value="Ice Cream">Fries(Dessert)</option>
+          <option value="Gulab Jamun">Brownie (Dessert)</option>
+          <option value="Brownie">Gulab Jamun (Dessert)</option>
+        </select>
+        <label for="quantity-${bookingCount}">Quantity</label>
+        <input type="number" id="quantity-${bookingCount}" name="quantity" min="1" value="1" required>
+        <button type="button" class="removeBookingItem" style="margin:8px 0 12px 0;">Remove</button>
+        <hr>
+      `;
+      bookingItems.appendChild(div);
+
+      // Remove item handler
+      div.querySelector('.removeBookingItem').onclick = function() {
+        div.remove();
+      };
+    });
+
+    document.getElementById('bookingForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const bookingItems = document.querySelectorAll('.booking-item');
+      let details = '';
+      let grandTotal = 0;
+      bookingItems.forEach((item, idx) => {
+        const food = item.querySelector('select[name="food"]').value;
+        const quantity = item.querySelector('input[name="quantity"]').value;
+        const price = priceMap[food] || 0;
+        const total = price * quantity;
+        grandTotal += total;
+        details += `<strong>Item ${idx+1}:</strong> ${food} x ${quantity} = ₹${total}<br>`;
+      });
+      var name = document.getElementById('name').value;
+      var phone = document.getElementById('phone').value;
+      var location = document.getElementById('location').value;
+      document.getElementById('bookingDetails').innerHTML =
+        "<strong>Name:</strong> " + name + "<br>" +
+        "<strong>Phone:</strong> " + phone + "<br>" +
+        "<strong>Location:</strong> " + location + "<br>" +
+        details +
+        "<strong>Grand Total:</strong> ₹" + grandTotal;
+      document.getElementById('successMsg').style.display = 'block';
+    });
+  </script>
+</body>
+</html>
